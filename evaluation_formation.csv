@@ -1,0 +1,16 @@
+evaluation_id,formation_id,type_formation,formateur_id,satisfaction,contenu,logistique,applicabilite,commentaire,langue,date
+1,F001,Lean Six Sigma,FOR01,5,4,4,3,Formation très utile et bien structurée,FR,2024-01-05
+2,F001,Lean Six Sigma,FOR01,4,4,3,3,Contenu intéressant mais trop théorique,FR,2024-01-05
+3,F002,SAP,FOR02,3,3,2,2,Rythme trop rapide difficile à suivre,FR,2024-01-18
+4,F002,SAP,FOR02,2,3,2,2,Je n’ai pas bien compris certaines fonctionnalités,FR,2024-01-18
+5,F003,Processus Métier,FOR03,5,5,4,4,Très utile pour mon poste applicable immédiatement,FR,2024-02-02
+6,F003,Processus Métier,FOR03,4,4,4,4,Bonne formation mais durée courte,FR,2024-02-02
+7,F004,Soft Skills,FOR04,3,4,4,3,Bonne ambiance mais contenu général,FR,2024-02-15
+8,F004,Soft Skills,FOR04,2,3,3,2,Manque de profondeur sur les cas réels,FR,2024-02-15
+9,F005,SAP,FOR05,5,5,4,4,Formateur très compétent et clair,FR,2024-03-01
+10,F005,SAP,FOR05,4,4,4,4,Très bonne formation globalement,FR,2024-03-01
+11,F006,Lean Six Sigma,FOR06,2,3,2,2,Trop théorique difficile à appliquer,FR,2024-03-20
+12,F006,Lean Six Sigma,FOR06,3,3,3,2,Formation correcte mais manque d’exercices,FR,2024-03-20
+13,F007,Processus Métier,FOR07,4,5,4,5,Excellente formation très opérationnelle,FR,2024-04-10
+14,F007,Processus Métier,FOR07,5,5,5,5,Parfaitement adaptée à nos besoins,FR,2024-04-10
+15,F008,Soft Skills,FOR08,3,3,3,3,Formation moyenne peu d’outils concrets,FR,2024-04-25

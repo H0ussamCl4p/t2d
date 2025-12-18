@@ -129,16 +129,6 @@ App: http://localhost:3000
 │   ├── RH_infos.csv
 │   └── evaluation_formation.csv
 └── README.md
-```
-
----
-
-## 🖼 Screenshots (placeholders)
-
-- ![Dashboard Screenshot](./screenshots/dashboard.png)
-- ![Analytics Screenshot](./screenshots/analytics.png)
-- ![Chatbot Screenshot](./screenshots/chatbot.png)
-
 ---
 
 ## 🔭 Roadmap
@@ -150,18 +140,6 @@ App: http://localhost:3000
 
 ---
 
-## Compliance & Security Notes
-
-- The prototype is designed with GDPR principles: data minimization, local-first processing, and audit-friendly logs. For production, integrate encrypted storage, HSM-backed secrets, and a formal data retention policy.
-
----
-
-If you'd like, I can also:
-- Add example deployment configs for Docker Compose
-- Wire up an encrypted SQLite example and a migration to Postgres
-- Generate a short onboarding deck for judges
-
----
 
 _Prepared for the Safran Think to Deploy Hackathon — engineering-focused, privacy-first, and industrial-ready._
 
