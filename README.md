@@ -1,145 +1,223 @@
----
 # Safran Neural Hub
-_Secure Edge-AI Platform for HR Analytics & Intelligent Assistance_
+_Plateforme Edge-AI Sécurisée pour l'Analytique RH & l'Assistance Intelligente_
 
 [![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-async-green?logo=fastapi)](https://fastapi.tiangolo.com/)
-[![GDPR Compliant](https://img.shields.io/badge/GDPR-Compliant-blueviolet)](https://gdpr.eu/)
+[![GDPR Compliant](https://img.shields.io/badge/GDPR-Conforme-blueviolet)](https://gdpr.eu/)
 [![Edge Ready](https://img.shields.io/badge/Edge-Ready-orange)](#)
 
 ---
 
-## 🚀 Executive Summary
+## 🎯 Objectif du POC
 
-**Safran Neural Hub** is a privacy-first, industrial-grade prototype delivered for the "Safran Think to Deploy" Hackathon. It solves common HR operational pain points—manual CSV processing, slow insights, and unsafe third-party AI—by providing a secure, local Edge-AI platform that performs analytics and conversational assistance without sending sensitive data to third-party cloud services.
+**Safran Neural Hub** est un prototype de qualité industrielle conçu selon le principe **"Privacy-First"** (confidentialité par conception) pour le Hackathon **"Safran Think to Deploy"**.
 
-Key value:
-- Local-first processing (air-gapped ready) to eliminate data exfiltration risk
-- Rapid KPI generation and weak-signal detection for HR teams
-- A semantic, RAG-powered assistant (“Bob”) that runs from local embeddings
+Il répond aux problématiques opérationnelles critiques des RH — traitement manuel des fichiers CSV, lenteur d'analyse et risques liés aux IA tierces — en proposant une plateforme **Edge-AI locale et sécurisée**. Celle-ci permet d'effectuer des analyses avancées et d'offrir une assistance conversationnelle sans jamais envoyer de données sensibles vers des services cloud tiers.
 
----
+### Valeur ajoutée clé
 
-## 🏗 Architecture (textual)
-
-- Frontend: Next.js 14 (App Router) — Industrial-tailored UI with Tailwind CSS
-- Backend: FastAPI (async Python) — Pydantic models, JWT authentication
-- Intelligence: Local RAG using SentenceTransformers + Scikit-Learn for analytics
-- Data: SQLite (local, recommended encrypted at rest for production)
-
-This architecture is intentionally edge-first to guarantee data sovereignty and reduce operational surface area in industrial deployments.
+* **Traitement local (Edge) :** Architecture prête pour les environnements déconnectés (Air-gapped) afin d'éliminer tout risque d'exfiltration de données
+* **Analytique RH :** Génération rapide de KPI et détection automatique de "signaux faibles" (anomalies)
+* **Assistant "Bob" :** Un assistant sémantique basé sur le RAG (Retrieval-Augmented Generation) utilisant des embeddings calculés localement
 
 ---
 
-## ✨ Key Features
+## ⚙️ Instructions d'Installation et d'Exécution
 
-- 📊 HR Analytics
-	- CSV ingestion pipeline -> automated KPI generation (satisfaction, volume, trends)
-	- Sentiment analysis and time-series insights
-	- Weak-signal detection (anomaly/early-warning flags)
+Voici les étapes minimales pour exécuter le projet localement en utilisant deux terminaux. Ces instructions supposent que **Python 3.11+** et **Node.js 18+** sont installés sur votre machine.
 
-- 🤖 "Bob" — Local RAG Assistant
-	- Embeddings generated with SentenceTransformers stored locally
-	- Retrieval-Augmented Generation for context-rich responses
-	- No outbound API calls: zero data exfiltration risk
+### 1. Backend (Terminal A)
 
-- 🔒 Security Core
-	- JWT authentication and role-ready design
-	- Input sanitization to mitigate XSS / SQLi vectors
-	- Air-gapped ready; GDPR-aligned data handling and minimization
-
----
-
-## ⚡ Quick Start — Happy Path (Local Development)
-
-Below are minimal steps to run the project locally in two terminals. These instructions assume Python 3.11+ and Node.js installed.
-
-### Backend (Terminal A)
+Mise en place de l'environnement Python et lancement de l'API FastAPI.
 
 ```bash
 cd backend
+
+# Création de l'environnement virtuel
 python -m venv .venv
-# Windows PowerShell: .venv\\Scripts\\Activate.ps1
-# Windows CMD: .venv\\Scripts\\activate.bat
-source .venv/bin/activate   # macOS / Linux
+
+# Activation de l'environnement
+# Windows PowerShell :
+.venv\Scripts\Activate.ps1
+# Windows CMD :
+.venv\Scripts\activate.bat
+# macOS / Linux :
+source .venv/bin/activate
+
+# Installation des dépendances
 pip install -r requirements.txt
+
+# Lancement du serveur
 uvicorn main:app --reload --port 8000
 ```
 
-API docs: http://localhost:8000/docs
+**Documentation de l'API disponible sur :** [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### Frontend (Terminal B)
+### 2. Frontend (Terminal B)
+
+Installation des dépendances JS et lancement de l'interface Next.js.
 
 ```bash
 cd frontend
+
+# Installation des dépendances
 npm install
+
+# Lancement du serveur de développement
 npm run dev
 ```
 
-App: http://localhost:3000
+**Application accessible sur :** [http://localhost:3000](http://localhost:3000)
 
-### Default Credentials (demo)
-- Email: `admin@safran.com`
-- Password: `admin123`
+### 3. Identifiants par défaut (Démo)
 
----
+Pour accéder au tableau de bord, utilisez les identifiants administrateur suivants :
 
-## 🧰 Tech Stack (selected libraries)
+* **Email :** `admin@safran.com`
+* **Mot de passe :** `admin123`
 
-- Backend: FastAPI, Pydantic, SQLAlchemy, aiosqlite / asyncpg adapter-ready, PyJWT
-- Intelligence: SentenceTransformers, scikit-learn, faiss (optional local index)
-- Frontend: Next.js 14 (App Router), React 18, Tailwind CSS, Recharts, Lucide Icons
-- DevOps & Runtime: Uvicorn, npm, Dockerfile (docker-ready but optional for air-gapped deployments)
+> ⚠️ **Note de sécurité :** Ces identifiants sont uniquement pour la démonstration. En production, utilisez un système d'authentification robuste avec mots de passe hachés (bcrypt/argon2).
 
 ---
 
-## 🛡 Why this architecture? (Industrial / Cyber Rationale)
+## 🏗 Architecture Technique
 
-- Security & Sovereignty: Running embeddings and RAG locally removes external data dependencies and potential cloud-based exfiltration pathways.
-- Predictable Latency: Local SQLite and in-process models deliver consistent, low-latency responses important for operational workflows.
-- Minimal Attack Surface: Fewer moving parts and no cloud-managed storage simplify audit, compliance, and hardening.
-- Practical Prototype Trade-offs: SQLite + local models accelerates development and reproducibility for a hackathon while remaining production-extensible.
+* **Frontend :** Next.js 14 (App Router) — Interface industrielle sur-mesure avec Tailwind CSS
+* **Backend :** FastAPI (Python asynchrone) — Modèles Pydantic, Authentification JWT
+* **Intelligence :** RAG Local utilisant SentenceTransformers + Scikit-Learn pour l'analytique
+* **Données :** SQLite (local, chiffré au repos recommandé pour la production)
 
----
+Cette architecture est intentionnellement conçue **"Edge-first"** pour garantir la souveraineté des données et réduire la surface d'attaque dans les déploiements industriels.
 
-## 📂 Project Structure (key folders)
+### Diagramme d'Architecture
 
 ```
-.
+┌─────────────────────────────────────────────────────────────┐
+│                    Conteneur Docker (Isolé)                 │
+│                                                               │
+│  ┌──────────────┐      ┌──────────────┐      ┌───────────┐ │
+│  │  Frontend UI │ ───► │ API Gateway  │ ───► │Persistence│ │
+│  │  Next.js 14  │      │   FastAPI    │      │  SQLite   │ │
+│  └──────────────┘      └──────┬───────┘      └───────────┘ │
+│                               │                              │
+│                               ▼                              │
+│                        ┌──────────────┐                      │
+│                        │  Moteur IA   │                      │
+│                        │    Local     │                      │
+│                        │ Transformers │                      │
+│                        └──────────────┘                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## ✨ Fonctionnalités Clés
+
+### 📊 Analytique RH
+
+* Pipeline d'ingestion CSV → Génération automatisée de KPI (satisfaction, volume, tendances)
+* Analyse de sentiment et insights temporels
+* Détection de signaux faibles (alertes précoces sur les dérives de formation)
+
+### 🤖 "Bob" — Assistant RAG Local
+
+* Embeddings générés via SentenceTransformers et stockés localement
+* Génération Augmentée par la Récupération (RAG) pour des réponses contextuelles
+* Aucun appel API sortant : risque d'exfiltration de données nul
+
+### 🔒 Cœur de Sécurité
+
+* Authentification JWT et conception prête pour le RBAC (rôles)
+* Sanitization des entrées pour mitiger les vecteurs d'attaque XSS / SQLi
+* Compatible Air-gapped ; traitement des données aligné avec le RGPD (minimisation)
+
+---
+
+## 🛡 Pourquoi cette architecture ? (Approche Cyber / Industrielle)
+
+**Sécurité & Souveraineté :** L'exécution locale des embeddings et du RAG supprime les dépendances externes et les vecteurs d'exfiltration vers le Cloud.
+
+**Latence Prévisible :** L'utilisation de SQLite et de modèles in-process assure des réponses cohérentes et rapides, cruciales pour les flux opérationnels.
+
+**Surface d'Attaque Minimale :** Moins de composants mobiles et pas de stockage géré par le Cloud simplifient l'audit, la conformité et le durcissement (hardening).
+
+**Compromis Pragmatique pour POC :** SQLite + modèles locaux accélèrent le développement et la reproductibilité pour le hackathon tout en restant extensibles pour la production.
+
+---
+
+## 📂 Structure du Projet
+
+```
+safran-neural-hub/
 ├── backend/
-│   ├── auth.py
-│   ├── database.py
-│   ├── init_db.py
-│   ├── main.py                # FastAPI app + endpoints
-│   ├── models.py
+│   ├── auth.py                      # Gestion JWT et authentification
+│   ├── database.py                  # Configuration SQLite
+│   ├── main.py                      # Application FastAPI + endpoints
+│   ├── models.py                    # Modèles Pydantic
 │   ├── services/
-│   │   ├── analysis_service.py
-│   │   └── chatbot_service.py
-│   └── requirements.txt
+│   │   ├── analysis_service.py      # Pipeline analytique RH
+│   │   └── chatbot_service.py       # Moteur RAG local
+│   └── requirements.txt             # Dépendances Python
 ├── frontend/
 │   ├── app/
-│   │   ├── (dashboard)/
-│   │   ├── login/
-│   │   └── layout.tsx
-│   ├── components/
-│   ├── contexts/
-│   └── package.json
+│   │   ├── (dashboard)/             # Routes du tableau de bord
+│   │   ├── login/                   # Page d'authentification
+│   │   └── layout.tsx               # Layout global
+│   ├── components/                  # Composants React réutilisables
+│   ├── package.json                 # Dépendances Node.js
+│   └── next.config.js               # Configuration Next.js
 ├── data/
-│   ├── RH_infos.csv
-│   └── evaluation_formation.csv
-└── README.md
----
-
-## 🔭 Roadmap
-
-- Role-Based Access Control (RBAC) & fine-grained permissions
-- Mobile PWA for offline-first access
-- Encrypted SQLite (at-rest) and key management
-- Containerized industrial deployment (Docker Compose / Kubernetes)
+│   ├── RH_infos.csv                 # Données RH (exemple)
+│   └── evaluation_formation.csv     # Évaluations de formation
+└── README.md                        # Ce fichier
+```
 
 ---
 
+## 🚀 Déploiement en Production
 
-_Prepared for the Safran Think to Deploy Hackathon — engineering-focused, privacy-first, and industrial-ready._
+### Recommandations pour un environnement industriel
 
+1. **Conteneurisation :** Utiliser Docker avec images multi-stage pour réduire la surface d'attaque
+2. **Chiffrement :** Activer SQLCipher ou équivalent pour le chiffrement au repos de la base de données
+3. **Secrets Management :** Utiliser des variables d'environnement sécurisées (Vault, AWS Secrets Manager)
+4. **Reverse Proxy :** Déployer derrière Nginx/Traefik avec certificats TLS (Let's Encrypt)
+5. **Monitoring :** Intégrer Prometheus + Grafana pour la supervision
+6. **Audit Logs :** Activer les logs structurés (JSON) avec rotation automatique
+
+### Pipeline DevSecOps
+
+```
+Commit → Linting → SAST → Build → Scan → Deploy
+  ↓        ↓        ↓       ↓       ↓       ↓
+ Git   Flake8   Bandit  Docker  Trivy  Registry
+```
+
+---
+
+## 📝 Licence et Conformité
+
+* **Projet Hackathon :** Code fourni à titre démonstratif
+* **RGPD :** Architecture conforme par conception (minimisation des données, traitement local)
+* **Dépendances Open Source :** Voir `requirements.txt` et `package.json` pour les licences tierces
+
+---
+
+## 👥 Équipe Srataero
+
+* **CHOUBIK Houssam** — Architecture & Backend
+* **TARIRHI Asmaâ** — Frontend & UX/UI
+* **SABBAHI Mohammed Ilias** — IA & Data Science
+
+**Contact :** [choubikhoussam@gmail.com](mailto:choubikhoussam@gmail.com)
+
+---
+
+## 🙏 Remerciements
+
+Merci à **Safran** et **Think to Deploy** pour l'opportunité de démontrer une approche Edge-AI sécurisée et souveraine pour les cas d'usage industriels critiques.
+
+---
+
+**Made with 🛡️ Security-First mindset | Edge-AI for Industrial Grade Systems**
